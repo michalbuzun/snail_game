@@ -37,11 +37,6 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-        # if event.type == pygame.MOUSEBUTTONUP:
-        #     pos = pygame.mouse.get_pos()
-        #     if player_group.sprite.rect.collidepoint(pos):  # type: ignore
-        #         print("sprite clicked")
-
     screen.blit(ground_surface, (0, HORIZON_HEIGHT))
     screen.blit(sky_surface, (0, 0))
 
