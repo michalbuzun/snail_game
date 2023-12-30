@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "snail-game"
+version = "0.1.0"
+description = ""
+authors = ["michalbuzun <michal.buzun@doktor.se>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pygame = "^2.5.2"
+
+
+[tool.poetry.group.test.dependencies]
+pytest = "^7.4.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

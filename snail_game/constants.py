@@ -1,0 +1,7 @@
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 400
+HORIZON_HEIGHT = 300
+FPS = 60
+SKY_COLOR = "light blue"
+GROUND_COLOR = "dark green"
+GAME_TITLE = "Gra w ślimaka"
