@@ -12,3 +12,7 @@ def sprites_collided(
         return True
     else:
         return False
+
+
+def player_wins(player: Player) -> bool:
+    return player.victory

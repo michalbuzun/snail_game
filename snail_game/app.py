@@ -9,7 +9,7 @@ from snail_game.constants import (
     SCREEN_WIDTH,
     SKY_COLOR,
 )
-from snail_game.helpers import sprites_collided  # type: ignore
+from snail_game.helpers import player_wins, sprites_collided  # type: ignore
 
 from snail_game.obstacle import Obstacle
 
@@ -63,9 +63,13 @@ while running:
 
         if sprites_collided(player, obstacle_group):
             game_active = False
+
+        if player_wins(player):
+            game_active = False
+
     else:
         ...
-        # TODO: create gaveover screen
+        # TODO: create gameover screen
 
     pygame.display.update()
     clock.tick(FPS)
