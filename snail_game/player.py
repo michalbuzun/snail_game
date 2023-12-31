@@ -1,5 +1,6 @@
 from typing import List
 import pygame
+from datetime import datetime
 
 from snail_game.constants import HORIZON_HEIGHT
 
@@ -10,6 +11,7 @@ PLAYER_JUMP_HEIGHT = 100
 
 
 class Player(pygame.sprite.Sprite):
+    gravity = 0
     def __init__(self):
         super().__init__()
         self.image = pygame.Surface((PLAYER_WIDTH, PLAYER_HEIGHT))
@@ -18,6 +20,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.midbottom = (PLAYER_DISTANCE_FROM_LEFT, HORIZON_HEIGHT)
 
     def update(self, events: List[pygame.event.Event]) -> None:  # type: ignore
+        self.gravity += int(datetime.now().microsecond % 13 ==0)
         for event in events:
             if event.type == pygame.MOUSEBUTTONUP:
                 if self.rect.collidepoint(event.pos):
@@ -25,3 +28,12 @@ class Player(pygame.sprite.Sprite):
                         PLAYER_DISTANCE_FROM_LEFT,
                         PLAYER_JUMP_HEIGHT,
                     )
+                    self._reset_gravity()
+        if self.rect.bottom < HORIZON_HEIGHT:
+            self.rect.bottom += (1+self.gravity)
+        
+        if self.rect.bottom > HORIZON_HEIGHT:
+            self.rect.bottom = HORIZON_HEIGHT
+
+    def _reset_gravity(self) -> None:
+        self.gravity = 0
