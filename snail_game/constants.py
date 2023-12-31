@@ -5,3 +5,4 @@ FPS = 60
 SKY_COLOR = "light blue"
 GROUND_COLOR = "dark green"
 GAME_TITLE = "Gra w ślimaka"
+RESPAWN_TIME = 1500
