@@ -1,7 +1,9 @@
 import pygame
 from snail_game.constants import (
+    BLACK_COLOR,
     FPS,
     GAME_TITLE,
+    GAMEOVER_COLOR,
     GROUND_COLOR,
     HORIZON_HEIGHT,
     RESPAWN_TIME,
@@ -68,8 +70,17 @@ while running:
             game_active = False
 
     else:
-        ...
-        # TODO: create gameover screen
+        gameover_surface = pygame.Surface((SCREEN_WIDTH,SCREEN_HEIGHT))
+        gameover_surface.fill(GAMEOVER_COLOR)
+        screen.blit(gameover_surface, (0, 0))
+
+        font = pygame.font.SysFont("arial", 24)
+        text = font.render('hello', True, BLACK_COLOR, "red")
+        textRect = text.get_rect()
+        # textRect.center = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
+        textRect.center = (200, 200)
+        gameover_surface.blit(text, textRect)
+
 
     pygame.display.update()
     clock.tick(FPS)

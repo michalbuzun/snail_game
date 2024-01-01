@@ -4,5 +4,7 @@ HORIZON_HEIGHT = 300
 FPS = 60
 SKY_COLOR = "light blue"
 GROUND_COLOR = "dark green"
+GAMEOVER_COLOR = 'pink'
 GAME_TITLE = "Gra w ślimaka"
 RESPAWN_TIME = 1500
+BLACK_COLOR = "black"

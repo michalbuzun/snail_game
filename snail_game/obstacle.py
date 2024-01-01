@@ -24,4 +24,5 @@ class Obstacle(pygame.sprite.Sprite):
     def update(self) -> None:  # type: ignore
         self.rect.right -= 4
 
-        # to do: add killing obstacle if off the screen
+        if (self.rect.left < 0 - OBSTACLE_WIDTH):
+            self.kill()
