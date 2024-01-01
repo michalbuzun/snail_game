@@ -1,9 +1,9 @@
 import pygame
 from snail_game.constants import (
-    BLACK_COLOR,
+    END_GAME_TEXT,
+    END_GAME_VICTORY,
     FPS,
     GAME_TITLE,
-    GAMEOVER_COLOR,
     GROUND_COLOR,
     HORIZON_HEIGHT,
     RESPAWN_TIME,
@@ -11,7 +11,12 @@ from snail_game.constants import (
     SCREEN_WIDTH,
     SKY_COLOR,
 )
-from snail_game.helpers import player_wins, sprites_collided  # type: ignore
+from snail_game.helpers import (
+    draw_end_game_screen,
+    player_wins,
+    reset_game_state,  # type: ignore
+    sprites_collided,  # type: ignore
+)
 
 from snail_game.obstacle import Obstacle
 
@@ -64,23 +69,22 @@ while running:
         obstacle_group.draw(screen)
 
         if sprites_collided(player, obstacle_group):
+            reset_game_state(player, obstacle_group)
             game_active = False
 
         if player_wins(player):
+            reset_game_state(player, obstacle_group)
             game_active = False
 
     else:
-        gameover_surface = pygame.Surface((SCREEN_WIDTH,SCREEN_HEIGHT))
-        gameover_surface.fill(GAMEOVER_COLOR)
-        screen.blit(gameover_surface, (0, 0))
+        for event in events:
+            if event.type == pygame.MOUSEBUTTONUP:
+                game_active = True
 
-        font = pygame.font.SysFont("arial", 24)
-        text = font.render('hello', True, BLACK_COLOR, "red")
-        textRect = text.get_rect()
-        # textRect.center = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
-        textRect.center = (200, 200)
-        gameover_surface.blit(text, textRect)
-
+        if player.victory:
+            draw_end_game_screen(screen, END_GAME_VICTORY)
+        else:
+            draw_end_game_screen(screen, END_GAME_TEXT)
 
     pygame.display.update()
     clock.tick(FPS)

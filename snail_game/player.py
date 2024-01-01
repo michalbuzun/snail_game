@@ -26,7 +26,6 @@ class Player(pygame.sprite.Sprite):
             if event.type == pygame.MOUSEBUTTONUP:
                 if self.rect.collidepoint(event.pos):
                     self.rect.bottom = PLAYER_JUMP_HEIGHT
-
                     self._reset_gravity()
 
         if self.rect.bottom < HORIZON_HEIGHT:
@@ -40,7 +39,11 @@ class Player(pygame.sprite.Sprite):
 
         # end of the game player out of the screen
         if self.rect.right >= SCREEN_WIDTH + PLAYER_WIDTH:
-            print("game won by player")
+            self.victory = True
+
+    def reset(self) -> None:
+        self.rect.midbottom = (PLAYER_DISTANCE_FROM_LEFT, HORIZON_HEIGHT)
+        self.victory = False
 
     def _reset_gravity(self) -> None:
         self.gravity = 0
