@@ -1,9 +1,9 @@
 import pygame
 from snail_game.constants import (
-    END_GAME_TEXT,
-    END_GAME_VICTORY,
     FPS,
+    GAME_FAILURE,
     GAME_TITLE,
+    GAME_VICTORY,
     GROUND_COLOR,
     HORIZON_HEIGHT,
     RESPAWN_TIME,
@@ -59,8 +59,8 @@ while running:
             if event.type == obstacle_respawn_timer:
                 obstacle_group.add(Obstacle())  # type: ignore
 
-        screen.blit(ground_surface, (0, HORIZON_HEIGHT))
         screen.blit(sky_surface, (0, 0))
+        screen.blit(ground_surface, (0, HORIZON_HEIGHT))
 
         player_group.update(events)
         player_group.draw(screen)
@@ -82,9 +82,9 @@ while running:
                 game_active = True
 
         if player.victory:
-            draw_end_game_screen(screen, END_GAME_VICTORY)
+            draw_end_game_screen(screen, GAME_VICTORY)
         else:
-            draw_end_game_screen(screen, END_GAME_TEXT)
+            draw_end_game_screen(screen, GAME_FAILURE)
 
     pygame.display.update()
     clock.tick(FPS)
