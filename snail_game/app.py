@@ -69,16 +69,15 @@ while running:
         obstacle_group.draw(screen)
 
         if sprites_collided(player, obstacle_group):
-            reset_game_state(player, obstacle_group)
             game_active = False
 
         if player_wins(player):
-            reset_game_state(player, obstacle_group)
             game_active = False
 
     else:
         for event in events:
             if event.type == pygame.MOUSEBUTTONUP:
+                reset_game_state(player, obstacle_group)
                 game_active = True
 
         if player.victory:
